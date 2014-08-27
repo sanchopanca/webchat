@@ -5,26 +5,18 @@ par_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                        os.path.pardir)
 sys.path.append(par_dir)
 
-from flask import Flask, request, redirect, url_for, Response
+from flask import Flask, request, redirect, url_for
 from flask import render_template
 from flask_wtf import CsrfProtect
-
+from werkzeug.exceptions import NotFound
 from flask_login import LoginManager, login_user, logout_user, login_required
 from flask_login import current_user
 from flask_bootstrap import Bootstrap
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
-from webchat import models, db
+from webchat import db
 from webchat.forms import RegisterForm, LoginForm, SubscribeForm
 from webchat.forms import UnsubscribeForm, SendForm
-
-import re
-import unicodedata
-from socketio import socketio_manage
-from socketio.namespace import BaseNamespace
-from socketio.mixins import RoomsMixin, BroadcastMixin
-from werkzeug.exceptions import NotFound
-from gevent import monkey
 
 DEBUG = True
 SECRET_KEY = 'secret key for development'

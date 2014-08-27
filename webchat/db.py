@@ -3,10 +3,8 @@ import hashlib
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from webchat import config
-
 Session = sessionmaker()
-engine = create_engine('sqlite:///{0}'.format(config.DB_FILE), echo=False)
+engine = create_engine('sqlite://', echo=False)
 Session.configure(bind=engine)
 
 
