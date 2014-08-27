@@ -14,7 +14,7 @@ from flask_login import current_user
 from flask_bootstrap import Bootstrap
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
-from webchat import db
+from webchat import db, models
 from webchat.forms import RegisterForm, LoginForm, SubscribeForm
 from webchat.forms import UnsubscribeForm, SendForm
 
@@ -204,4 +204,5 @@ def search_message(name):
 
 
 if __name__ == '__main__':
+    models.Base.metadata.create_all(db.engine)
     socketio.run(app)
