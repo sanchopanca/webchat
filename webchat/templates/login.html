@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+  {{ super() }}
+  <div class="container">
+  <h2>Login</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('log_in') }}" method=post>
+    {{ form.csrf_token }}
+      <p>Username:</p>
+      <p><input type=text name=login></p>
+      <p>Password:</p>
+      <p><input type=password name=password></p>
+      <p><button class="btn btn-primary">Login</button></p>
+  </form>
+  </div>
+{% endblock %}

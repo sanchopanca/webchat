@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+  {{ super() }}
+  <div class="container">
+  <h2>My Channels:</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% if not channels %}
+  There are no subscribes. <br>
+  <a href="{{url_for('channel_list')}}">Go to channel list</a>
+  {% endif %}
+  {% for channel in channels %}
+  <form action="{{ url_for('unsubscribe') }}" method=post>
+  {{ form.csrf_token }}
+      <p> <a href="{{ url_for('room', name=channel.name) }}">{{ channel.name }}: </a> </p>
+      <input type="hidden" name="channel_id" value="{{ channel.id }}">
+      <input type="hidden" name="return_to" value="my_channels">
+      <p><button class="btn btn-primary">Unsubscribe</button> </p>
+  </form>
+  {% endfor %}
+  </div>
+{% endblock %}

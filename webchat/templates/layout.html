@@ -1,0 +1,33 @@
+{% extends "bootstrap/base.html" %}
+    {% block content %}
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-inner">
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Simple email</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        {% if current_user.is_anonymous() %}
+                        <li><a href="{{ url_for('log_in') }}">Login</a></li>
+                        <li><a href="{{ url_for('register') }}">Registration</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('my_channels')}}">My Channels</a></li>
+                        <li><a href="{{ url_for('channel_list') }}">Channel List</a></li>
+                        <li><a href="{{ url_for('create_channel') }}">Create a Channel</a></li>
+                        <form class="navbar-form navbar-left" action="{{ url_for('search_channel') }}">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="search" placeholder="Search channel">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">{{ current_user.login }}</a></li>
+                        <li><a href="{{ url_for('log_out') }}">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block title %}WebChat{% endblock %}
